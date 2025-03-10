@@ -20,14 +20,3 @@
 # Plugins
 [[plugins]]
   package = "@netlify/plugin-zola"  # Use the official Zola plugin
-
-# Custom build settings or deploy context (optional)
-[build.context.production]
-  command = "zola build --base-url https://www.yoursite.com"  # Add custom settings for production builds
-
-# Redirects (optional, if you have custom redirects or rewrites)
-[[redirects]]
-  from = "/old-path"
-  to = "/new-path"
-  status = 301
-  force = true
