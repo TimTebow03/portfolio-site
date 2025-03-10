@@ -1,0 +1,11 @@
+[build]
+  command = "zola build"
+  publish = "public"
+
+[build.environment]
+  ZOLA_VERSION = "0.20.0"
+  PATH = "/opt/buildhome/.cargo/bin:$PATH"
+  
+[plugins]
+  [[plugins]]
+    package = "@netlify/plugin-zola"
