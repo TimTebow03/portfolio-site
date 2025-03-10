@@ -5,6 +5,9 @@
 [build.environment]
   ZOLA_VERSION = "0.20.0"
   PATH = "/opt/buildhome/.cargo/bin:$PATH"
-  
+
+[build.before_install]
+  command = "apt-get update && apt-get install -y mkdir touch"
+ 
 [[plugins]]
-    package = "@netlify/plugin-zola"
+  package = "@netlify/plugin-zola"
