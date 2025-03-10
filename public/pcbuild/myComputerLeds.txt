@@ -1,0 +1,43 @@
+#include <FastLED.h>
+
+#define NUM_LEDS 33  // Set the number of LEDs for this strip
+#define DATA_PIN 6   // The pin where the data line is connected
+
+CRGB leds[NUM_LEDS];
+
+void setup() {
+  FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
+  FastLED.setBrightness(255);  // Adjust brightness (0-255)
+}
+
+void loop() {
+  pumpEffect();
+}
+
+// Function to create the pumping effect with dramatic acceleration
+void pumpEffect() {
+  for (int i = 0; i < NUM_LEDS; i++) {  // Start from the first LED and move forward
+    // Set all LEDs to black
+    fill_solid(leds, NUM_LEDS, CRGB::Black);
+
+    // Calculate the color based on the position (dark green to acid green)
+    CRGB currentColor = blend(CRGB(255, 0, 0), CRGB(0, 0, 255), map(i, 0, NUM_LEDS - 1, 0, 255));
+
+    // Set the current position to the calculated color
+    leds[i] = currentColor;
+
+    // Fade the previous LEDs
+    for (int j = 0; j < i; j++) {
+      leds[j].fadeToBlackBy(5);  // Adjust fade amount if needed
+    }
+
+    // Show the current state
+    FastLED.show();
+
+    // Dramatic exponential delay calculation
+    float delayFactor = pow((1.0f - ((float)i / (NUM_LEDS - 1))), 4);  // Higher power for a sharper curve
+    int delayTime = 5 + (100 * delayFactor);  // Start with a delay of up to 250ms and decrease to 5ms
+
+    delay(delayTime);
+  }
+}
