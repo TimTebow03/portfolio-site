@@ -6,6 +6,5 @@
   ZOLA_VERSION = "0.20.0"
   PATH = "/opt/buildhome/.cargo/bin:$PATH"
   
-[plugins]
-  [[plugins]]
+[[plugins]]
     package = "@netlify/plugin-zola"
