@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title> | my first post</title>
+    
+    <link rel="stylesheet" href="https://lifefromtheloam.com/style.css?h=501c6ea82db27d74ea03">
+    
+    
+        
+    
+</head>
+<body>
+    
+<header class="space">
+    <a href="https:&#x2F;&#x2F;lifefromtheloam.com">&LeftArrow; Home</a>
+</header>
+
+    
+<main>
+    <h1>my first post</h1>
+    
+    <div class="space"></div>
+    <p>I wanted to add customisable RGB lighting inside my PC case without relying on software running on my operating system to control it. Since building my PC, I have wrestled with different RGB lighting software to manage my CPU cooler and graphics card. None seemed reliable, as the RGB would often "reset" to factory settings, and I didn't like the idea of it constantly running in the background. The fact that I dual-boot also complicated things, as I needed a Linux-compatible alternative.</p>
+<p>My solution was to control WS2812B LED strips using a microcontroller and power both the LEDs and the controller directly from my PC’s power supply. This ensures they automatically turn on and off with the PC.</p>
+<p>The power supply in my computer is rated at 25A on the 5V rail. I chose this because my Arduino Uno can be directly powered by it, as can the 5V LEDs. To access the 5V rail, I bought a Molex connector from AliExpress, cut off the connectors, and soldered both the red (5V) and black (ground) wires together. This setup is pretty janky, and upgrading it is my next priority.</p>
+<img src="/pcbuild/molex.png" alt="My Image" style="width: 400px;">
+<p>I purchased 2 metres of WS2812B LED strips along with curved silicone diffuser tubes to create a smoother lighting effect. My idea was to have multiple short LED strip runs extending from the corners of the PC case toward the CPU/GPU, making it look like "energy" was being pumped into the heart of the system.</p>
+<p>I cut down the LED strips into lengths of around 28–33 LEDs. They didn’t all have to be exact—if there were fewer LEDs than the program expected, it would still send the data as if they were there, allowing all strips to run in sync.</p>
+<p>To distribute power to each LED strip and the Arduino, I bought a 1-to-6-way barrel jack splitter. This allows me to unplug any LED strip at any time if one gets damaged or if I want to remove it. It also gives me the flexibility to add more strips as long as I have available connections.</p>
+<p>I soldered new power, ground, and data lines to each strip using 22 AWG wire, then soldered the power and ground wires into their respective female barrel jack connectors.</p>
+<p>The splitter is wired to the Molex cable, ensuring power and ground are correctly matched.</p>
+<p>Since my Arduino Uno has a barrel jack connector, it was easy to plug it directly into the 6-way splitter for power.</p>
+<p>To connect the data lines together, I used a Wago 5-way connector. While it isn’t designed for permanent solutions, I decided it was suitable since it draws little current and remains stationary, reducing the risk of it being knocked or damaged. I connected each LED strip’s data line to the Wago connector, along with a wire that leads from the last remaining slot to a data pin on the Arduino.</p>
+<p>I used the FastLED library to program the LEDs. This library runs efficiently on an Arduino and allows for the exact complexity of LED effects I was aiming for.</p>
+<p>Here is the code: /add code here/</p>
+<p>Eventually, I decided I wanted my Arduino Uno back, so I purchased an Arduino Nano instead. The Nano is smaller, has a faster clock speed (20MHz vs 16MHz), and still uses 5V logic levels. I soldered the pins onto the Nano and mounted it on a piece of protoboard along with a barrel jack for power and a wire for the data line.</p>
+<p>For housing, I repurposed an old plastic container, cutting it to fit the components inside. It doesn’t look the best, but it provides access to the USB port on the Nano as well as the data line and jack connector.</p>
+<video controls width="800">
+  <source src="/pcbuild/ledDemo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+</main>
+
+    <div class="dark-mode-buttons">
+        <button class="dark-mode-button" id="dark-mode-on"><img src="https://lifefromtheloam.com/dark_mode.svg" width="24" height="24" alt="Dark mode" aria-label="dark mode toggle" title="Dark mode"></button>
+        <button class="dark-mode-button" id="dark-mode-off"><img src="https://lifefromtheloam.com/light_mode.svg" width="24" height="24" alt="Light mode" aria-label="light mode toggle" title="Light mode"></button>
+    </div>
+    <script>
+        const cls = document.querySelector("html").classList;
+        const sessionTheme = sessionStorage.getItem("theme");
+
+        function setDark() {
+            cls.add("dark-mode");
+            cls.remove("light-mode");
+            sessionStorage.setItem("theme", "dark");
+        }
+        function setLight() {
+            cls.add("light-mode");
+            cls.remove("dark-mode");
+            sessionStorage.setItem("theme", "light");
+        }
+
+        if (sessionTheme === "dark") {
+            setDark();
+        } else if (sessionTheme === "light") {
+            setLight();
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            setDark();
+        }
+
+        document.getElementById("dark-mode-on").addEventListener("click", function(e) {
+            setDark();
+        });
+        document.getElementById("dark-mode-off").addEventListener("click", function(e) {
+            setLight();
+        });
+    </script>
+    <noscript>
+        <style>
+            .dark-mode-buttons {
+                display: none;
+            }
+        </style>
+    </noscript>
+</body>
+</html>
