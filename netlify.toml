@@ -15,7 +15,7 @@
 # Pre-build steps (Before the install step)
 [build.before_install]
   # Install required system dependencies if missing
-  command = "apt-get update && apt-get install -y mkdir touch"
+  command = "apt-get update && apt-get install -y coreutils"
 
 # Plugins
 [[plugins]]
