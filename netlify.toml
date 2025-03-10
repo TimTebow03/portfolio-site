@@ -1,10 +1,33 @@
+# Netlify Configuration File for Zola Static Site
+
 [build]
-  command = "echo $PATH && which mkdir && which touch && zola --version && zola build"
+  # The command to run to build your project
+  command = "zola build"
+  
+  # The directory to publish after the build
   publish = "public"
 
+# Environment Variables
 [build.environment]
-  ZOLA_VERSION = "0.20.0"
-  PATH = "/opt/buildhome/.cargo/bin:$PATH"
+  ZOLA_VERSION = "0.20.0"  # Ensure the correct version of Zola
+  PATH = "/opt/buildhome/.cargo/bin:$PATH"  # Add Cargo binaries to the path if needed
 
+# Pre-build steps (Before the install step)
+[build.before_install]
+  # Install required system dependencies if missing
+  command = "apt-get update && apt-get install -y mkdir touch"
+
+# Plugins
 [[plugins]]
-  package = "@netlify/plugin-zola"
+  package = "@netlify/plugin-zola"  # Use the official Zola plugin
+
+# Custom build settings or deploy context (optional)
+[build.context.production]
+  command = "zola build --base-url https://www.yoursite.com"  # Add custom settings for production builds
+
+# Redirects (optional, if you have custom redirects or rewrites)
+[[redirects]]
+  from = "/old-path"
+  to = "/new-path"
+  status = 301
+  force = true
