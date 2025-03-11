@@ -1,7 +1,7 @@
 #include <FastLED.h>
 
-#define NUM_LEDS 33  // Number of LEDs in the strip
-#define DATA_PIN 6   // Pin for LED data line
+#define NUM_LEDS 33
+#define DATA_PIN 6
 
 CRGB leds[NUM_LEDS];
 
@@ -18,19 +18,20 @@ void loop() {
 
 void pumpEffect() {
   for (int i = 0; i < NUM_LEDS; i++) {  
-    // Set the current LED color (red to blue blend)
+    // Currently is pure red to pure blue blend.. mainly purple though
     leds[i] = blend(CRGB(255, 0, 0), CRGB(0, 0, 255), map(i, 0, NUM_LEDS - 1, 0, 255));
 
-    // Gradually fade previous LEDs
+    // Leave fading trail behind focus led
     for (int j = 0; j < NUM_LEDS; j++) {
-      leds[j].fadeToBlackBy(80);  // Lower = longer fade effect
+      leds[j].fadeToBlackBy(80);  // fade duration
     }
 
     FastLED.show();
 
-    // 🔥 Increased exponent for **slower start + faster acceleration**
+    // note: Increase max delay for more dramatic ramp up
+    // note: Increase exponent for more pronounced effect
     float delayFactor = pow((1.0f - ((float)i / (NUM_LEDS - 1))), 4.5);  
-    int delayTime = 2 + (120 * delayFactor);  // Higher max delay for a more dramatic ramp-up
+    int delayTime = 2 + (120 * delayFactor);
 
     delay(delayTime);
   }

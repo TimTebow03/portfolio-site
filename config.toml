@@ -1,6 +1,6 @@
 # The URL the site will be built for
 # base_url = "https://lifefromtheloam.com"
-base_url = "https://lifefromtheloam.netlify.app"
+base_url = "https://lifefromtheloam.net"
 theme = "hook"
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -23,6 +23,6 @@ bottom_footnotes = true
 [extra]
 # Put all your custom variables here
 links = [
-#	{ title = "posts", href = "https://lifefromtheloam.com/blog/" },
+	{ title = "Github", href = "https://github.com/TimTebow03" },
 
 	]

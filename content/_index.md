@@ -1,8 +1,6 @@
 +++
-title = "Testing Homepage"
-extra.in_header = true
+title = "Life From the Loam"
 +++
-again
-test!!
 
-this is me testing my github webhook :D
+Life From the Loam
+------------------
