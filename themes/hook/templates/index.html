@@ -53,7 +53,7 @@
         </div>
         {% endif %}
         {% if blog.pages %}
-        <h3>My Posts</h3>
+        <h3>Posts</h3>
         <ul>
             {% for post in blog.pages | slice(end=20) %}
             <li><a href="{{ post.permalink }}">{{ post.title }}</a></li>
