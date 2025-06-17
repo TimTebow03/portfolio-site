@@ -1,5 +1,5 @@
 +++
-title = "Winstar OLED Driver *Comming Soon*"
+title = "Winstar OLED Driver *Coming Soon*"
 +++
 
 _dafting_
