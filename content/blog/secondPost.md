@@ -1,5 +1,6 @@
 +++
 title = "Must consume Media"
+draft = true
 +++
 
 Some of my favourite albums, books, art and videos

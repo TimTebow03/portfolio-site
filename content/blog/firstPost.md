@@ -80,7 +80,7 @@ I used the FastLED library to program the LEDs. This library runs efficiently on
    </code></pre>
 </details>
 
-Eventually, I decided I wanted my Arduino Uno back, so I purchased an Arduino Nano instead. The Nano is smaller, has a faster clock speed (20MHz vs 16MHz), and still uses 5V logic levels. I soldered the pins onto the Nano and mounted it on a piece of protoboard along with a barrel jack for power and a wire for the data line.
+Eventually, I decided I wanted my Arduino Uno back, so I purchased an Arduino Nano instead. The Nano is smaller, has a faster clock speed (20MHz vs 16MHz), and still uses 5V logic levels. I soldered on header pins and mounted it to a piece of protoboard along with a barrel jack for power and a wire for the data line.
 
 For housing, I repurposed an old plastic container, cutting it to fit the components inside. It doesn’t look the best, but it provides access to the USB port on the Nano as well as the data line and jack connector.
 <details open>
